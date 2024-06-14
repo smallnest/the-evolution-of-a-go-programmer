@@ -207,6 +207,35 @@ func Factorial(n int) int {
 }
 ```
 
+## Guru Go Programmer
+
+```go
+package fac
+
+import "iter"
+
+// Factorial returns n!.
+func Factorial(n int) int {
+	res := 1
+
+	for i := range factorial(n) {
+		res *= i
+	}
+
+	return res
+}
+
+func factorial(n int) iter.Seq[int] {
+	return func(yield func(int) bool) {
+		for i := range n {
+			if !yield(i + 1) {
+				break
+			}
+		}
+	}
+}
+```
+
 ## Rob Pike
 
 ```text
